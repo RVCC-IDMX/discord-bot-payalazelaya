@@ -22,17 +22,23 @@ client.on('ready', () => {
 client.on('messageCreate', (message) => {
   if (message.content === 'ping') {
     message.react('😄').then(console.log).catch(console.error);
-    message.reply({
-      content: 'pong',
-    });
+    message
+      .reply({
+        content: 'pong',
+      })
+      .catch(console.error);
   }
   if (message.content === 'cowsay') {
     message.react('🐄').then(console.log).catch(console.error);
-    message.reply(`
+    message
+      .reply(
+        `
     \`\`\`
     ${cow}
     \`\`\`
-    `);
+    `
+      )
+      .catch(console.error);
   }
 });
 
