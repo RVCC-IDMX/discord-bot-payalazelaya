@@ -3,9 +3,13 @@ import dotenv from 'dotenv';
 import * as cowsay from 'cowsay';
 
 let output: string = cowsay.say({
-  text: 'Hoot hoot!',
-  f: 'owl',
+  text: 'Hi from the typescript!',
+  r: true,
+  //f: 'mona-lisa',
 });
+//console.log(output);
+//console.log(output.length);
+
 dotenv.config();
 
 const client = new DiscordJS.Client({
@@ -35,6 +39,14 @@ client.on('messageCreate', (message) => {
     \`\`\`
     `
       )
+      .catch(console.error);
+  }
+  if (message.content === 'cowsay' && output.length > 2000) {
+    message.react('😔').then(console.log).catch(console.error);
+    message
+      .reply({
+        content: 'exceeds the 2000 character limit',
+      })
       .catch(console.error);
   }
 });
