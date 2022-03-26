@@ -15,10 +15,11 @@ const val = quotes[rand];
 const quoteMessage = val.quote;
 const author = val.author;
 
-export default function () {
+export default function (animal = 'owl') {
   let output: string = cowsay.say({
     text: `${quoteMessage} - ${author}`,
-    r: true,
+    e: 'oo',
+    f: animal,
   });
   return output;
 }

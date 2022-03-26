@@ -36,6 +36,12 @@ client.on('messageCreate', (message) => {
     .trim()
     .split(/ /);
   const command = args.shift()!;
+  const param = args.pop();
+
+  console.log(message.content);
+  console.log(param);
+  console.log(typeof param);
+  console.log(command);
 
   if (command === 'ping') {
     message.react('😄').then(console.log).catch(console.error);
@@ -46,8 +52,15 @@ client.on('messageCreate', (message) => {
       .catch(console.error);
   }
   if (command === 'cowsay') {
+    //message.react('🐄').then(console.log).catch(console.error);
+    try {
+      cowsay(param);
+    } catch (error) {
+      console.log(error);
+      return;
+    }
     message.react('🐄').then(console.log).catch(console.error);
-    const output = cowsay();
+    const output = cowsay(param);
     if (command === 'cowsay' && output.length > 2000) {
       message.react('😔').then(console.log).catch(console.error);
       message
