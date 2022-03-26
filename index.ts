@@ -1,14 +1,9 @@
 import DiscordJS, { Intents } from 'discord.js';
 import dotenv from 'dotenv';
-import * as cowsay from 'cowsay';
+import cowsay from './utils/cowsay';
 
-let output: string = cowsay.say({
-  text: 'Hi from the typescript!',
-  r: true,
-  //f: 'mona-lisa',
-});
+const output = cowsay();
 //console.log(output);
-//console.log(output.length);
 
 dotenv.config();
 
