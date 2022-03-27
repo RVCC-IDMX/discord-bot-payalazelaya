@@ -4,6 +4,7 @@ import cowsay from './utils/cowsay';
 
 dotenv.config();
 
+//How to get the bot to respond in channels
 const CHANNELS = process.env.CHANNELS || null;
 
 if (!CHANNELS) {
