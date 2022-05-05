@@ -10,16 +10,26 @@ Format the values of quote and author to a string
 Pass the string into the default function below
 */
 
-const rand = getRandomInt(0, 25);
-const val = quotes[rand];
-const quoteMessage = val.quote;
-const author = val.author;
-
-export default function (animal = 'owl') {
-  let output: string = cowsay.say({
+export default function (animal: any) {
+  const rand = getRandomInt(0, 25);
+  const val = quotes[rand];
+  const quoteMessage = val.quote;
+  const author = val.author;
+  const ops = {
     text: `${quoteMessage} - ${author}`,
     e: 'oo',
     f: animal,
-  });
+    r: false,
+  };
+  if (!animal) {
+    ops.r = true;
+  }
+  let output;
+  try {
+    output = cowsay.say(ops);
+  } catch {
+    console.error('error');
+    output = `${animal} does not exist`;
+  }
   return output;
 }

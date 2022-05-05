@@ -50,7 +50,12 @@ client.on('messageCreate', (message) => {
   console.log(command);
 
   if (command === 'ping') {
-    message.react('😄').then(console.log).catch(console.error);
+    message
+      .react('😄')
+      .then(() => {
+        console.log('ping reaction');
+      })
+      .catch(console.error);
     message
       .reply({
         content: 'pong',
@@ -65,25 +70,19 @@ client.on('messageCreate', (message) => {
       console.log(error);
       return;
     }
-    message.react('🐄').then(console.log).catch(console.error);
-    const output = cowsay(param);
-    if (command === 'cowsay' && output.length > 2000) {
-      message.react('😔').then(console.log).catch(console.error);
-      message
+    message.react('🐄').then().catch(console.error);
+    let output = cowsay(param);
+    if (output.length > 1990) {
+      message.react('😔').then().catch(console.error);
+      /*  message
         .reply({
           content: 'exceeds the 2000 character limit',
         })
-        .catch(console.error);
+        .catch(console.error); */
+      output = output.substring(0, 1990);
     }
-    message
-      .reply(
-        `
-    \`\`\`
-    ${output}
-    \`\`\`
-    `
-      )
-      .catch(console.error);
+    output = output.replace(/\`\`\`/g, "'''");
+    message.reply(`\`\`\`${output}\`\`\``).catch(console.error);
   }
 });
 
